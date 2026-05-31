@@ -175,3 +175,7 @@ The final website uses a dark cybersecurity / IT laboratory dashboard style:
 - Clean light glass-style tables for readability
 - Bootstrap components with custom CSS in `static/css/app.css`
 - Responsive layout for laptop and desktop demonstration
+
+## Project Prepared By
+
+Prepared by Yana for the Computer System Security course at UniKL MIIT.
