@@ -159,11 +159,6 @@ secure_lab_borrowing/
 |-- .env.example
 `-- .gitignore
 ```
-
-## Screenshots for Report
-
-Use `docs/screenshots_needed.md` and `docs/evidence_log.md` as the screenshot checklist. Include application screenshots, audit log screenshots, failed security test screenshots, Bandit output, pip-audit output, Django test output, ZAP before/after scans, GitHub repository, commit history, README, and GitHub Actions workflow result.
-
 ## Final UI Design
 
 The final website uses a dark cybersecurity / IT laboratory dashboard style:
