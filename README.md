@@ -178,4 +178,5 @@ The final website uses a dark cybersecurity / IT laboratory dashboard style:
 
 ## Project Prepared By
 
-Prepared by Yana for the Computer System Security course at UniKL MIIT.
+Lyana Yasmin
+> UniKL MIIT
