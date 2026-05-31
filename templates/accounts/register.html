@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block auth_content %}
+<section class="auth-shell">
+    <div class="auth-card">
+        <div class="auth-visual">
+            <div class="brand-mark mb-4"><i class="bi bi-person-plus"></i></div>
+            <h1 class="display-6 fw-bold mb-3">Join Secure LabOps</h1>
+            <p class="lead text-muted">Create a normal-user account for borrowing university IT lab equipment.</p>
+            <div class="terminal-panel">
+                <div>&gt; password.policy --strong</div>
+                <div>&gt; role.default --normal-user</div>
+                <div>&gt; audit.registration --enabled</div>
+            </div>
+        </div>
+        <div class="auth-form">
+            <span class="badge severity-badge mb-3"><i class="bi bi-shield-check"></i> Account Registration</span>
+            <h2 class="h3 fw-bold mb-3">Create Account</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        <div class="text-danger small">{{ field.errors }}</div>
+                        {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+                    </div>
+                {% endfor %}
+                <button class="btn btn-primary w-100" type="submit">
+                    <i class="bi bi-person-check me-1"></i>Register
+                </button>
+                <div class="text-center mt-3 small text-muted">
+                    Already registered? <a href="{% url 'accounts:login' %}">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+# Screenshots Needed
+
+- Login page
+- Registration page
+- Admin dashboard with dark SOC-style UI
+- User dashboard with request status cards
+- Admin equipment page
+- User borrowing request page
+- Audit log page
+- Failed login log
+- Unauthorized access 403 page
+- Final table design with readable light/glass table
+- Profile page
+- ZAP scan before mitigation
+- ZAP scan after mitigation
+- Bandit result
+- pip-audit result
+- Django automated test result
+- Django system check result
+- Migration check result
+- GitHub repository
+- GitHub commit history
+- GitHub Actions security workflow result
+- README screenshot

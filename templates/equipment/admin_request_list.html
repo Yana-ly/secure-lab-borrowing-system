@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}All Requests{% endblock %}
+{% block breadcrumb %}Borrow Requests{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <h1 class="page-title h2 mb-1">All Borrowing Requests</h1>
+    <p class="text-muted mb-0">Review, approve, reject, or remove borrowing requests from the secure console.</p>
+</div>
+{% include "equipment/request_table_admin.html" %}
+{% endblock %}

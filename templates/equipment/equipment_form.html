@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block breadcrumb %}Equipment Form{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <h1 class="page-title h2 mb-1">{{ title }}</h1>
+    <p class="text-muted mb-0">Maintain controlled laboratory equipment inventory records.</p>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save me-1"></i>Save</button>
+                <a class="btn btn-outline-secondary" href="{% url 'equipment:equipment_list' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

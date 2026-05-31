@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block breadcrumb %}Profile{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start gap-3 mb-4">
+    <div>
+        <h1 class="page-title h2 mb-1">My Profile</h1>
+        <p class="text-muted mb-0">Account identity, role, and borrowing activity summary.</p>
+    </div>
+    <span class="badge severity-badge"><i class="bi bi-person-check me-1"></i>{{ profile_obj.get_role_display }}</span>
+</div>
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="brand-mark"><i class="bi bi-person-badge"></i></div>
+                    <div>
+                        <h2 class="h4 mb-0">{{ user.username }}</h2>
+                        <div class="text-muted">{{ user.email }}</div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="small text-muted">Role</div>
+                    <div class="fw-semibold">{{ profile_obj.get_role_display }}</div>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label class="form-label" for="{{ form.attachment.id_for_label }}"><i class="bi bi-paperclip me-1"></i>Optional secure attachment</label>
+                    {{ form.attachment }}
+                    <div class="form-text">PDF, JPG, or PNG only. Maximum size 2MB.</div>
+                    <div class="text-danger small">{{ form.attachment.errors }}</div>
+                    <button class="btn btn-outline-primary mt-3" type="submit"><i class="bi bi-upload me-1"></i>Update Attachment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="row g-3">
+            <div class="col-sm-6"><div class="card stat-card"><div class="card-body"><p class="text-muted mb-1">Total Requests</p><h2>{{ total_requests }}</h2></div></div></div>
+            <div class="col-sm-6"><div class="card stat-card"><div class="card-body"><p class="text-muted mb-1">Approved</p><h2>{{ approved_requests }}</h2></div></div></div>
+            <div class="col-sm-6"><div class="card stat-card"><div class="card-body"><p class="text-muted mb-1">Pending</p><h2>{{ pending_requests }}</h2></div></div></div>
+            <div class="col-sm-6"><div class="card stat-card"><div class="card-body"><p class="text-muted mb-1">Rejected</p><h2>{{ rejected_requests }}</h2></div></div></div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3 class="h5">Activity Summary</h3>
+                <p class="text-muted mb-0">This profile page is restricted to the authenticated owner and summarizes request outcomes for report evidence.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

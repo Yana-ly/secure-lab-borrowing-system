@@ -1,0 +1,17 @@
+# Security Mapping
+
+| Security requirement | OWASP category | Implementation in this project | File/code location | Evidence screenshot needed |
+| --- | --- | --- | --- | --- |
+| Input Validation | A03 Injection, ASVS V5 | Django forms, field validators, and `clean()` methods validate server-side input. | `accounts/forms.py`, `equipment/forms.py`, `accounts/models.py` | Registration validation, request validation error |
+| Authentication & Session | A07 Identification and Authentication Failures, ASVS V2/V3 | Django authentication, hashed passwords, strong validators, 15-minute session age, browser-close expiry. | `settings.py`, `accounts/views.py` | Login page, successful login |
+| Access Control | A01 Broken Access Control, ASVS V4 | `@login_required`, `admin_required`, and object ownership checks prevent unauthorized admin access and IDOR. | `accounts/decorators.py`, `equipment/views.py` | 403 page after normal user accesses admin URL |
+| Error Handling | A05 Security Misconfiguration, ASVS V14 | Custom 403, 404, and 500 templates. `DEBUG` controlled by `.env`. | `settings.py`, `templates/403.html`, `templates/404.html`, `templates/500.html` | 403 and 404 screenshots |
+| Sensitive Data Protection | A02 Cryptographic Failures, ASVS V6 | Secret key and debug mode use `.env`; passwords are hashed by Django; audit logs exclude secrets. | `.env.example`, `settings.py`, `audit/utils.py` | `.env.example`, admin user login |
+| File Upload Security | A04 Insecure Design, ASVS V12 | Optional profile attachment only allows PDF/JPG/PNG, MIME validation, 2MB size limit, UUID filename. | `accounts/models.py`, `accounts/forms.py`, `templates/accounts/profile.html` | Profile upload form |
+| Configuration Security | A05 Security Misconfiguration | Secure headers, CSP, clickjacking protection, cookie settings, `.gitignore` excludes secrets and database. | `settings.py`, `security_headers.py`, `.gitignore` | Browser headers/ZAP scan |
+| Logging & Monitoring | A09 Security Logging and Monitoring Failures | AuditLog records logins, failed logins, logout, CRUD, approvals, rejections, and unauthorized attempts. | `audit/models.py`, `audit/utils.py`, `audit/views.py` | Audit log page, failed login log |
+| Dependency Management | A06 Vulnerable and Outdated Components | Dependencies pinned in `requirements.txt`; README includes pip-audit commands. | `requirements.txt`, `README.md` | pip-audit result |
+| Output Encoding | A03 Injection, ASVS V5 | Django templates autoescape user output; no user input is marked safe; CSP reduces XSS impact. | `templates/`, `security_headers.py` | XSS test showing escaped output |
+| Automated Security Tests | A08 Software and Data Integrity Failures, SSDF RV.1 | Django tests verify authentication logging, validation, RBAC, IDOR blocking, and approval workflow. | `accounts/tests.py`, `equipment/tests.py` | Django test output |
+| CI/CD Security Checks | A08 Software and Data Integrity Failures, SSDF PO.3 | GitHub Actions runs Django checks, tests, Bandit, and pip-audit on push and pull request. | `.github/workflows/security-checks.yml` | GitHub Actions workflow result |
+| Secure UI and Usability | ASVS V1, secure design support | Final interface uses Bootstrap, Bootstrap Icons, dark SOC-style dashboard layout, readable glass-style tables, and clear admin/user menus. | `templates/base.html`, `static/css/app.css`, `static/js/app.js` | Dashboard, table, and navigation screenshots |

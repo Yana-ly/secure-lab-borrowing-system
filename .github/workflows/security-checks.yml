@@ -1,0 +1,37 @@
+name: Security Checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  django-security-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Django system check
+        run: python manage.py check
+
+      - name: Migration consistency check
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Unit and security tests
+        run: python manage.py test
+
+      - name: Bandit static analysis
+        run: bandit -r accounts audit equipment secure_lab_borrowing -x "*/migrations/*,*/tests.py"
+
+      - name: Dependency vulnerability scan
+        run: pip-audit
